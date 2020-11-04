@@ -75,6 +75,43 @@
       }
     </style>
 
-    <script></script>
+    <script>
+      // 1. Grab all inputs within the "controls" div
+      const inputs = document.querySelectorAll(".controls input");
+
+      // 2. Then listen for mouse movement or clicks on the inputs
+      // eg mouse over a slider
+      // When movement is registered, fire the handle update function
+      inputs.forEach((input) => input.addEventListener("change", handleUpdate));
+
+      inputs.forEach((input) =>
+        input.addEventListener("mousemove", handleUpdate)
+      );
+
+      // 3. Update the CSS variables by reading the element's "name" (eg Spacing)
+      // and taking the value (eg 10) of whatever is being set
+      // from the slider + the units (eg "px").
+      // Element example:
+      // <input
+      //   name="spacing"
+      //   value="10"
+      //   data-sizing="px"
+      // />
+
+      // We append the "--" because the CSS shows as...
+      // :root {
+      //   --base: red;
+      //   --spacing: 10px;
+      //   --blur: 10px;
+      // }
+      function handleUpdate() {
+        const units = this.dataset.sizing || "";
+
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + units
+        );
+      }
+    </script>
   </body>
 </html>
