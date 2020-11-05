@@ -73,19 +73,19 @@
 
       // Array.prototype.filter()
       // 1. Filter the list of inventors for those who were born in the 1500's
-      console.log(inventors.filter((x) => x.year > 1499 && x.year < 1600));
 
+      console.table(inventors.filter((x) => x.year > 1499 && x.year < 1600));
       // Array.prototype.map()
       // 2. Give us an array of the inventors first and last names
-      console.log(inventors.map((x) => `${x.first} ${x.last}`));
+      console.table(inventors.map((x) => `${x.first} ${x.last}`));
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
-      console.log(inventors.sort((a, b) => a.year - b.year));
+      console.table(inventors.sort((a, b) => a.year - b.year));
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
-      console.log(
+      console.table(
         inventors.reduce(
           (total, inventor) => total + inventor.passed - inventor.year,
           0
@@ -93,17 +93,23 @@
       );
 
       // 5. Sort the inventors by years lived
-      console.log(
+      console.table(
         inventors.sort((a, b) => a.passed - a.year - (b.passed - b.year))
       );
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-      console.log();
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
-      console.log(people.map((x) => x.split(",")));
+
+      console.table(
+        people.sort((lastName, nextName) => {
+          const [aLastName, aFirstName] = lastName.split(", ");
+          const [bLastName, bFirstName] = nextName.split(", ");
+          return aLastName > bLastName ? 1 : -1;
+        })
+      );
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -123,6 +129,16 @@
         "car",
         "truck",
       ];
+
+      const count = data.reduce(function (totals, vehicle) {
+        if (!totals[vehicle]) {
+          totals[vehicle] = 0;
+        }
+        totals[vehicle]++;
+        return totals;
+      }, {});
+
+      console.log(count);
     </script>
   </body>
 </html>
