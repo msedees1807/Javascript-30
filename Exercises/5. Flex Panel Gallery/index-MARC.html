@@ -87,10 +87,10 @@
       .panel > *:last-child {
         transform: translateY(100%);
       }
-      .panel open > *:first-child {
+      .panel.open-active > *:first-child {
         transform: translateY(0%);
       }
-      .panel open > *:last-child {
+      .panel.open-active > *:last-child {
         transform: translateY(0%);
       }
 
@@ -148,7 +148,8 @@
 
       function toggleHiddenText(e) {
         console.log(e);
-        if (e.propertyName) {
+        if (e.propertyName.includes("flex")) {
+          this.classList.toggle("open-active");
         }
       }
 
