@@ -36,6 +36,9 @@
 
       const searchInput = document.querySelector(".search");
       const suggestion = document.querySelector(".suggestions");
+
+      searchInput.addEventListener("change", displayMatches);
+      suggestion.addEventListener("keyup", displayMatches);
     </script>
   </body>
 </html>
