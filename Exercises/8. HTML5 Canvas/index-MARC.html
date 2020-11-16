@@ -13,10 +13,14 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      ctx.strokeStyle = "purple";
+      let hue = 0;
+      let saturation = "100%";
+      let light = "50%";
+
+      ctx.strokeStyle = "yellow";
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
-      ctx.lineWidth = 10;
+      ctx.lineWidth = 5;
 
       let isDrawing = false;
       let lastX = 0;
@@ -25,18 +29,25 @@
       function draw(e) {
         if (!isDrawing) return;
         console.log(e);
-
+        ctx.strokeStyle = `hsl(${hue}, ${saturation}, ${light})`;
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
-        lastX = e.offsetX;
-        lastY = e.offsetY;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+        hue++;
+        ctx.lineWidth++;
       }
 
       canvas.addEventListener("mousemove", draw);
-      canvas.addEventListener("mousedown", () => (isDrawing = true));
-      canvas.addEventListener("mouseup", () => (isDrawing = false));
+      canvas.addEventListener("mousedown", (e) => {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      });
+      canvas.addEventListener("mouseup", () => {
+        isDrawing = false;
+        ctx.lineWidth = 5;
+      });
       canvas.addEventListener("mouseout", () => (isDrawing = false));
     </script>
 
