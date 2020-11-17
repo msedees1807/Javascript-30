@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 },
+      ];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+      function makeGreen() {
+        const p = document.querySelector("p");
+        p.style.color = "#BADA55";
+        p.style.fontSize = "50px";
+      }
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      // NOTE: snippets mean typing clg then tab will give you a console.log
 
-    // Regular
+      // Regular
+      console.log("test");
 
-    // Interpolated
+      // Interpolated
+      console.log(`Hello, my name is ${dogs[0].name}`);
 
-    // Styled
+      // Styled
+      console.log(
+        "%c HELLO!",
+        "font-size: 20px; color: red; background: black"
+      );
+      // warning!
+      console.warn("Failed to receive input in time");
 
-    // warning!
+      // Error :|
+      console.error("Failed, ooops");
 
-    // Error :|
+      // Info
+      console.info("Did you know...");
 
-    // Info
+      // Testing
 
-    // Testing
+      // clearing
+      //console.clear();
 
-    // clearing
+      // Viewing DOM Elements
+      // console.dir(p);
 
-    // Viewing DOM Elements
+      // Grouping together
+      console.group();
+      console.log("hey");
+      console.log("hey");
+      console.log("hey");
+      console.groupEnd();
 
-    // Grouping together
+      // counting
+      console.count("Marc");
+      console.count("Marc");
+      console.count("Marc");
+      console.count("Marc");
+      console.count("Marc");
+      console.count("Marc");
 
-    // counting
+      // timing - how long something takes
+      console.time("fetch data");
 
-    // timing
-
-  </script>
-</body>
+      fetch("https://api.github.com/users/wesbos")
+        .then((data) => data.json())
+        .then(console.timeEnd("fetch data"));
+    </script>
+  </body>
 </html>
