@@ -34,7 +34,7 @@
         text-decoration: line-through;
       }
 
-      input[type="checkbox"] {
+      input[type="checkbox" id =] {
         margin: 20px;
       }
 
@@ -57,48 +57,71 @@
   -->
     <div class="inbox">
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="1" />
         <p>This is an inbox layout.</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="2" />
         <p>Check one item</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="3" />
         <p>Hold down your Shift key</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="4" />
         <p>Check a lower item</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="5" />
         <p>Everything in between should also be set to checked</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="6" />
         <p>Try to do it without any libraries</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="7" />
         <p>Just regular JavaScript</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="8" />
         <p>Good Luck!</p>
       </div>
       <div class="item">
-        <input type="checkbox" />
+        <input type="checkbox" id="9" />
         <p>Don't forget to tweet your result!</p>
       </div>
     </div>
 
     <script>
-      const checkbox = document.querySelectorAll("item");
+      const checkbox = document.querySelectorAll("checkbox");
       const checkboxes = Array.from(checkbox);
 
-      console.log(checkboxes);
+      let checkboxStart;
+      let checkboxEnd;
+
+      // give each checkbox an id
+      // on shift key down, switch on multi-select
+      // click one checkbox for id start
+      // click second checkbox for id end
+      // select all from id start -> id end
+
+      //Press Shift
+      document.addEventListener("keydown", function (e) {
+        if (e.shiftKey) {
+          multiSelect();
+        }
+      });
+
+      //Multi Select enabled, set the start and end values in here
+      function multiSelect() {
+        checkboxStart = 1;
+        checkboxEnd = 5;
+        for (i = checkboxStart; i <= checkboxEnd; i++) {
+          document.getElementById(i).checked = true;
+        }
+      }
     </script>
   </body>
 </html>
