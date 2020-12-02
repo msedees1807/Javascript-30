@@ -95,41 +95,29 @@
     </div>
 
     <script>
-      const checkbox = document.querySelectorAll("checkbox");
-      const checkboxes = Array.from(checkbox);
+      // select all inputs of type checkbox
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-      const checkbox2 = document.querySelectorAll(
-        ".inbox input[type=checkbox]"
-      );
-      console.log(checkbox2);
+      // listen out for a click on each checkbox, then handle the click
+      checkboxes.forEach((x) => x.addEventListener("click", handleClick));
 
-      let checkboxStart;
-      let checkboxEnd;
+      let lastCheckBox = false;
 
-      // give each checkbox an id
-      // on shift key down, switch on multi-select
-      // click one checkbox for id start
-      // click second checkbox for id end
-      // select all from id start -> id end
+      function handleClick(e) {
+        let inBetween;
+        // check shift key pressed and box is being checked
+        if (e.shiftKey && this.checked) {
+          checkboxes.forEach((x) => {
+            if (x === this || x === lastCheckBox) {
+              inBetween = !inBetween;
+            }
 
-      //Press Shift
-      window.addEventListener("keydown", function (e) {
-        if (e.shiftKey) {
-          multiSelect();
+            if (inBetween) {
+              x.checked = true;
+            }
+          });
         }
-      });
-
-      //Multi Select enabled, set the start and end values in here
-      function multiSelect() {
-        checkboxStart = 1;
-        checkboxEnd = 5;
-
-        let x = document.getElementById("checkbox").checked;
-        console.warn(x);
-
-        for (i = checkboxStart; i <= checkboxEnd; i++) {
-          document.getElementById(i).checked = true;
-        }
+        lastCheckBox = this;
       }
     </script>
   </body>
