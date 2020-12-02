@@ -101,23 +101,24 @@
       // listen out for a click on each checkbox, then handle the click
       checkboxes.forEach((x) => x.addEventListener("click", handleClick));
 
-      let lastCheckBox = false;
+      // Last checked checkbox
+      let lastChecked;
 
       function handleClick(e) {
-        let inBetween;
+        let inBetween = false;
         // check shift key pressed and box is being checked
         if (e.shiftKey && this.checked) {
           checkboxes.forEach((x) => {
-            if (x === this || x === lastCheckBox) {
+            if (x === this || x === lastChecked) {
               inBetween = !inBetween;
             }
-
             if (inBetween) {
               x.checked = true;
             }
           });
         }
-        lastCheckBox = this;
+        // sets the value of the last checked checkbox on each click
+        lastChecked = this;
       }
     </script>
   </body>
